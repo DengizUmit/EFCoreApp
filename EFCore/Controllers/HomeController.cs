@@ -13,11 +13,21 @@ namespace EFCore.Controllers
         {
             UdemyContext udemyContext = new();
 
-            var entityEntry = udemyContext.Products.Add(new Data.Entities.Product
-            {
-                Name = "Telephone",
-                Price = 1480
-            });
+            //var entityEntry = udemyContext.Products.Add(new Data.Entities.Product
+            //{
+            //    Name = "Telephone",
+            //    Price = 1480
+            //});
+
+            //udemyContext.Products.Update(new Data.Entities.Product
+            //{
+            //    Id = 1,
+            //    Price = 2750
+            //});
+
+            var updatedProduct = udemyContext.Products.Find(1);
+            updatedProduct.Price = 3300;
+            udemyContext.Products.Update(updatedProduct);
 
             udemyContext.SaveChanges();
 
