@@ -16,5 +16,11 @@ namespace EFCore.Data.Contexts
         {
             optionsBuilder.UseSqlServer("server=(localdb)\\mssqllocaldb; database=UdemyEfCore; integrated security=true");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Category>().ToTable(name: "Categories", schema: "dbo");
+            base.OnModelCreating(modelBuilder);
+        }
     }
-}
+} 
