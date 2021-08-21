@@ -25,9 +25,12 @@ namespace EFCore.Controllers
             //    Price = 2750
             //});
 
-            var updatedProduct = udemyContext.Products.Find(1);
-            updatedProduct.Price = 3300;
-            udemyContext.Products.Update(updatedProduct);
+            //var updatedProduct = udemyContext.Products.Find(1);
+            //updatedProduct.Price = 3300;
+            //udemyContext.Products.Update(updatedProduct);
+
+            var deletedProduct = udemyContext.Products.FirstOrDefault(x => x.Id == 1);
+            udemyContext.Products.Remove(deletedProduct);
 
             udemyContext.SaveChanges();
 
