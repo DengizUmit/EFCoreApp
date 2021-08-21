@@ -17,10 +17,17 @@ namespace EFCore.Data.Contexts
             optionsBuilder.UseSqlServer("server=(localdb)\\mssqllocaldb; database=UdemyEfCore; integrated security=true");
         }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Category>().ToTable(name: "Categories", schema: "dbo");
-        //    base.OnModelCreating(modelBuilder);
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<Category>().ToTable(name: "Categories", schema: "dbo");
+            modelBuilder.Entity<Product>().Property(x => x.Name).HasColumnName("product_name");
+            modelBuilder.Entity<Product>().Property(x => x.Name).HasMaxLength(100);
+            modelBuilder.Entity<Product>().Property(x => x.Name).IsRequired();
+            modelBuilder.Entity<Product>().Property(x => x.Id).HasColumnName("product_id");
+            modelBuilder.Entity<Product>().Property(x => x.Price).HasColumnName("product_price");
+            modelBuilder.Entity<Product>().Property(x => x.Price).HasPrecision(18, 3);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 } 
