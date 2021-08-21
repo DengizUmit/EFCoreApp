@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EFCore.Data.Contexts;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,16 @@ namespace EFCore.Controllers
     {
         public IActionResult Index()
         {
+            UdemyContext udemyContext = new();
+
+            var entityEntry = udemyContext.Products.Add(new Data.Entities.Product
+            {
+                Name = "Telephone",
+                Price = 1480
+            });
+
+            udemyContext.SaveChanges();
+
             return View();
         }
     }
