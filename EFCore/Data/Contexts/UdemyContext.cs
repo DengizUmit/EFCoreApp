@@ -16,6 +16,8 @@ namespace EFCore.Data.Contexts
 
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+
         public DbSet<Customer> Customers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -25,10 +27,22 @@ namespace EFCore.Data.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Many To Many
+            modelBuilder.Entity<Category>().
+                HasMany(x => x.ProductCategories).WithOne(x => x.Category).
+                HasForeignKey(x => x.CategoryId);
+            modelBuilder.Entity<Product>().
+                HasMany(x => x.ProductCategories).WithOne(x => x.Product).
+                HasForeignKey(x => x.CategoryId);
+
+            modelBuilder.Entity<ProductCategory>().HasKey(x => new { x.CategoryId, x.ProductId });
+
+            // One To One
             modelBuilder.Entity<Product>().
                 HasOne(x => x.ProductDetail).WithOne(x => x.Product).
                 HasForeignKey<ProductDetail>(x => x.ProductId);
 
+            // One To Many || Many To One
             //modelBuilder.Entity<Product>().
             //    HasMany(x => x.SaleHistories).WithOne(x => x.Product).
             //    HasForeignKey(x => x.ProductId);

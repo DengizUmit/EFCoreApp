@@ -16,5 +16,8 @@ namespace EFCore.Data.Entities
         //[MaxLength("100")]
         [Column("category_name", TypeName = "nvarchar(100)")]
         public string Name { get; set; }
+
+        //Navigation Property
+        public List<ProductCategory> ProductCategories { get; set; }
     }
 }
