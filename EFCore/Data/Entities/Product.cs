@@ -12,6 +12,7 @@ namespace EFCore.Data.Entities
         public decimal Price { get; set; }
         //Navigation Property
         public List<SaleHistory> SaleHistories { get; set; }
+        public ProductDetail ProductDetail { get; set; }
         public DateTime CreatedTime { get; set; }
     }
 }

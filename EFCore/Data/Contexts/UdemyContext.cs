@@ -12,6 +12,7 @@ namespace EFCore.Data.Contexts
         public DbSet<Product> Products { get; set; }
 
         public DbSet<SaleHistory> SaleHistories { get; set; }
+        public DbSet<ProductDetail> ProductDetails { get; set; }
 
         public DbSet<Category> Categories { get; set; }
 
@@ -24,6 +25,10 @@ namespace EFCore.Data.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Product>().
+                HasOne(x => x.ProductDetail).WithOne(x => x.Product).
+                HasForeignKey<ProductDetail>(x => x.ProductId);
+
             //modelBuilder.Entity<Product>().
             //    HasMany(x => x.SaleHistories).WithOne(x => x.Product).
             //    HasForeignKey(x => x.ProductId);
