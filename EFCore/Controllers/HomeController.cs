@@ -1,4 +1,5 @@
 ﻿using EFCore.Data.Contexts;
+using EFCore.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -29,8 +30,14 @@ namespace EFCore.Controllers
             //updatedProduct.Price = 3300;
             //udemyContext.Products.Update(updatedProduct);
 
-            var deletedProduct = udemyContext.Products.FirstOrDefault(x => x.Id == 1);
-            udemyContext.Products.Remove(deletedProduct);
+            //var deletedProduct = udemyContext.Products.FirstOrDefault(x => x.Id == 1);
+            //udemyContext.Products.Remove(deletedProduct);
+
+            Product product = new()
+            {
+                Price = 4000
+            };
+            udemyContext.Products.Add(product);
 
             udemyContext.SaveChanges();
 

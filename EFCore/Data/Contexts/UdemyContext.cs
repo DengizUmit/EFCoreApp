@@ -31,6 +31,8 @@ namespace EFCore.Data.Contexts
             modelBuilder.Entity<Product>().Property(x => x.Name).HasColumnName("product_name");
             modelBuilder.Entity<Product>().Property(x => x.Name).HasMaxLength(100);
             modelBuilder.Entity<Product>().Property(x => x.Name).IsRequired();
+            modelBuilder.Entity<Product>().Property(x => x.Name).HasDefaultValueSql("'product name not found'");
+            modelBuilder.Entity<Product>().Property(x => x.CreatedTime).HasDefaultValueSql("getdate()");
             modelBuilder.Entity<Product>().Property(x => x.Id).HasColumnName("product_id");
             modelBuilder.Entity<Product>().Property(x => x.Price).HasColumnName("product_price");
             modelBuilder.Entity<Product>().Property(x => x.Price).HasPrecision(18, 3);
