@@ -12,6 +12,9 @@ namespace EFCore.Data.Contexts
         public DbSet<Product> Products { get; set; }
 
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("server=(localdb)\\mssqllocaldb; database=UdemyEfCore; integrated security=true");
@@ -19,7 +22,12 @@ namespace EFCore.Data.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<Customer>().HasNoKey();
+            modelBuilder.Entity<Customer>().HasKey(x => x.Number);
+            //modelBuilder.Entity<Customer>().HasKey(x => new { x.Number, x.Name });
+
             //modelBuilder.Entity<Category>().ToTable(name: "Categories", schema: "dbo");
+            
             modelBuilder.Entity<Product>().Property(x => x.Name).HasColumnName("product_name");
             modelBuilder.Entity<Product>().Property(x => x.Name).HasMaxLength(100);
             modelBuilder.Entity<Product>().Property(x => x.Name).IsRequired();
