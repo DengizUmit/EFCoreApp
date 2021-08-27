@@ -39,6 +39,27 @@ namespace EFCore.Controllers
             };
             udemyContext.Products.Add(product);
 
+            udemyContext.Employees.Add(new FullTimeEmployee
+            {
+                DailyWage = 400,
+                FirstName = "Full1",
+                LastName = "Full"
+            });
+
+            udemyContext.Employees.Add(new PartTimeEmployee
+            {
+                HourlyWage = 40,
+                FirstName = "Part1",
+                LastName = "Part"
+            });
+
+            udemyContext.Employees.Add(new PartTimeEmployee
+            {
+                HourlyWage = 56, 
+                FirstName = "Part2",
+                LastName = "Part"
+            });
+
             udemyContext.SaveChanges();
 
             return View();
