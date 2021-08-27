@@ -62,6 +62,9 @@ namespace EFCore.Controllers
 
             udemyContext.SaveChanges();
 
+            var list = udemyContext.FullTimeEmployees.ToList();
+            var list2 = udemyContext.Employees.Where(x => x is PartTimeEmployee).ToList();
+
             return View();
         }
     }

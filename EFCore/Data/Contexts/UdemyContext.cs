@@ -33,6 +33,11 @@ namespace EFCore.Data.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Table Per Hierarchy -> Table Per Table
+            modelBuilder.Entity<Employee>().ToTable("Employees");
+            modelBuilder.Entity<FullTimeEmployee>().ToTable("FullTimeEmployees");
+            modelBuilder.Entity<PartTimeEmployee>().ToTable("PartTimeEmployees");
+
             // Many To Many
             modelBuilder.Entity<Category>().
                 HasMany(x => x.ProductCategories).WithOne(x => x.Category).
