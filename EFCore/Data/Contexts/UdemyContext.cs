@@ -26,6 +26,8 @@ namespace EFCore.Data.Contexts
 
         public DbSet<FullTimeEmployee> FullTimeEmployees { get; set; }
 
+        public DbSet<Person> Peoples { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("server=(localdb)\\mssqllocaldb; database=UdemyEfCore; integrated security=true");
