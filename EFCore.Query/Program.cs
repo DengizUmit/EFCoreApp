@@ -1,5 +1,6 @@
 ﻿using EFCore.Query.Data.Context;
 using EFCore.Query.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
@@ -35,21 +36,34 @@ namespace EFCore.Query
             //context.SaveChanges();
 
 
-            // IEnumerable
-            var blogs = context.Blogs.AsEnumerable();
-            var blogsIEnumerable = blogs.Where(x => x.Title.Contains("Blog-1") || x.Title.Contains("Blog-3"));
-            foreach (var item in blogsIEnumerable)
-            {
-                Console.WriteLine(item.Title);
-            }
+            //// IEnumerable
+            //var blogs = context.Blogs.AsEnumerable();
+            //var blogsIEnumerable = blogs.Where(x => x.Title.Contains("Blog-1") || x.Title.Contains("Blog-3"));
+            //foreach (var item in blogsIEnumerable)
+            //{
+            //    Console.WriteLine(item.Title);
+            //}
 
-            // IQueryable
-            var query = context.Blogs.AsQueryable();
-            var blogsIQueryable = query.Where(x => x.Title.Contains("Blog-1") || x.Title.Contains("Blog-3")).ToList();
-            foreach (var item in blogsIQueryable)
-            {
-                Console.WriteLine(item.Title);
-            }
+            //// IQueryable
+            //var query = context.Blogs.AsQueryable();
+            //var blogsIQueryable = query.Where(x => x.Title.Contains("Blog-1") || x.Title.Contains("Blog-3")).ToList();
+            //foreach (var item in blogsIQueryable)
+            //{
+            //    Console.WriteLine(item.Title);
+            //}
+
+
+            // Tracking
+            var updatedTrackingBlog = context.Blogs.SingleOrDefault(x => x.Id == 2);
+            updatedTrackingBlog.Title = "Updated";
+            var updatedTrackingBlogState = context.Entry(updatedTrackingBlog).State;
+
+            // No-Tracking
+            var updatedNoTrackingBlog = context.Blogs.AsNoTracking().SingleOrDefault(x => x.Id == 1);
+            updatedNoTrackingBlog.Title = "Updated";
+            var updatedNoTrackingBlogState = context.Entry(updatedNoTrackingBlog).State;
+
+            context.SaveChanges();
 
             Console.WriteLine("Console - EFCore App!");
         }
