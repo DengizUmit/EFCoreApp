@@ -66,15 +66,22 @@ namespace EFCore.Query
             //context.SaveChanges();
 
 
-            // Load Data : Lazy, Eager, Explict
-            var blogs = context.Blogs.Include(x => x.Comments.Where(x => x.Content.Contains("Comment1"))).ToList();
-            foreach (var blog in blogs)
+            //// Load Data : Lazy, Eager, Explict
+            //var blogs = context.Blogs.Include(x => x.Comments.Where(x => x.Content.Contains("Comment1"))).ToList();
+            //foreach (var blog in blogs)
+            //{
+            //    Console.WriteLine($"\t\t{blog.Title}");
+            //    foreach (var comment in blog.Comments)
+            //    {
+            //        Console.WriteLine($"\t\t{comment.Content}");
+            //    }
+            //}
+
+            var blog = context.Blogs.SingleOrDefault(x => x.Id == 1);
+            context.Entry(blog).Collection(x => x.Comments).Load();
+            foreach (var item in blog.Comments)
             {
-                Console.WriteLine($"\t\t{blog.Title}");
-                foreach (var comment in blog.Comments)
-                {
-                    Console.WriteLine($"\t\t{comment.Content}");
-                }
+                Console.WriteLine(item.Content);
             }
 
             Console.WriteLine("Console - EFCore App!");
