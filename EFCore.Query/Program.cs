@@ -67,7 +67,7 @@ namespace EFCore.Query
 
 
             // Load Data : Lazy, Eager, Explict
-            var blogs = context.Blogs.ToList();
+            var blogs = context.Blogs.Include(x => x.Comments.Where(x => x.Content.Contains("Comment1"))).ToList();
             foreach (var blog in blogs)
             {
                 Console.WriteLine($"\t\t{blog.Title}");

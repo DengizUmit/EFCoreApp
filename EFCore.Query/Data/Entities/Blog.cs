@@ -11,6 +11,6 @@ namespace EFCore.Query.Data.Entities
         public int Id { get; set; }
         public string Title { get; set; }
         public string Url { get; set; }
-        public virtual List<Comment> Comments { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }

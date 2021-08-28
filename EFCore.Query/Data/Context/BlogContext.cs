@@ -17,7 +17,7 @@ namespace EFCore.Query.Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLazyLoadingProxies().UseSqlServer("server=(localdb)\\mssqllocaldb; database=BlogContext; integrated security=true");
+            optionsBuilder.UseSqlServer("server=(localdb)\\mssqllocaldb; database=BlogContext; integrated security=true");
             optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
             base.OnConfiguring(optionsBuilder);
         }
