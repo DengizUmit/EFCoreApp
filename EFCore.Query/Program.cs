@@ -53,17 +53,29 @@ namespace EFCore.Query
             //}
 
 
-            // Tracking
-            var updatedTrackingBlog = context.Blogs.SingleOrDefault(x => x.Id == 2);
-            updatedTrackingBlog.Title = "Updated";
-            var updatedTrackingBlogState = context.Entry(updatedTrackingBlog).State;
+            //// Tracking
+            //var updatedTrackingBlog = context.Blogs.SingleOrDefault(x => x.Id == 2);
+            //updatedTrackingBlog.Title = "Updated";
+            //var updatedTrackingBlogState = context.Entry(updatedTrackingBlog).State;
 
-            // No-Tracking
-            var updatedNoTrackingBlog = context.Blogs.AsNoTracking().SingleOrDefault(x => x.Id == 1);
-            updatedNoTrackingBlog.Title = "Updated";
-            var updatedNoTrackingBlogState = context.Entry(updatedNoTrackingBlog).State;
+            //// No-Tracking
+            //var updatedNoTrackingBlog = context.Blogs.AsNoTracking().SingleOrDefault(x => x.Id == 1);
+            //updatedNoTrackingBlog.Title = "Updated";
+            //var updatedNoTrackingBlogState = context.Entry(updatedNoTrackingBlog).State;
 
-            context.SaveChanges();
+            //context.SaveChanges();
+
+
+            // Load Data : Lazy, Eager, Explict
+            var blogs = context.Blogs.ToList();
+            foreach (var blog in blogs)
+            {
+                Console.WriteLine($"\t\t{blog.Title}");
+                foreach (var comment in blog.Comments)
+                {
+                    Console.WriteLine($"\t\t{comment.Content}");
+                }
+            }
 
             Console.WriteLine("Console - EFCore App!");
         }
