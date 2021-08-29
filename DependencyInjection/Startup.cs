@@ -1,4 +1,5 @@
 using DependencyInjection.Controllers;
+using DependencyInjection.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -18,6 +19,10 @@ namespace DependencyInjection
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IProductService, ProductManager>();
+            services.AddTransient<ITransientService, TransientManager>();
+            services.AddSingleton<ISingletonService, SingletonManager>();
+            services.AddScoped<IScopedService, ScopedManager>();
+
             services.AddControllersWithViews();
         }
 

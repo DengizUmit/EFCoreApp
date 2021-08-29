@@ -1,13 +1,31 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml">
+﻿@inject DependencyInjection.Services.SingletonManager _singletonManager
+@inject DependencyInjection.Services.TransientManager _transientManager
+@inject DependencyInjection.Services.ScopedManager _scopedManager
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>App</title>
 </head>
 
 <body>
+
     <p>
-        Index Works
+        Singleton = @ViewBag.Singleton
+        <br />
+        Singleton2 = @_singletonManager.GuidId
     </p>
+    <p>
+        Transient = @ViewBag.Transient
+        <br />
+        Transient2 = @_transientManager.GuidId
+    </p>
+    <p>
+        Scoped = @ViewBag.Scoped
+        <br />
+        Scoped2 = @_scopedManager
+    </p>
+
 </body>
 
 </html>
